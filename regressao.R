@@ -31,8 +31,7 @@ regression <- function() {
   testSample <- dataFrame[-sample,]
   
   model <- rpart(formula = area ~  X + Y + month + day + FFMC + DMC + DC + ISI + temp + RH + wind + rain, 
-                 data = trainSample, method = "anova", control = rpart.control(minsplit = 1), 
-                 parms = list(split = "Information"), model = TRUE)
+                 data = trainSample, method = "anova", model = TRUE)
   
   predicted <- predict(model, testSample, type = "vector")
   
@@ -47,6 +46,6 @@ regression <- function() {
 
 regressionResult <- regression()
 cat("Método de Regreção:\n")
-cat("Erro Médio Quadrático: ",regrResult$mse,"\n")
+cat("Erro Médio Quadrático: ",regressionResult$mse,"\n")
 
 rpart.plot(regressionResult$model)
